@@ -5,6 +5,7 @@ A CLI tool that lets you ask natural language questions about your PDF documents
 ## How it works
 
 Ingest: PDF -> extract text -> chunk -> embed -> store in ChromaDB
+
 Query: question -> embed -> cosine similarity search -> top-3 chunks -> LLM prompt -> response
 
 First, you provide the path to the PDF document you want to use. Next, it extracts the text from the pdf using PyPDF and chunks it into smaller pieces. Using sentence-transformers (a local all-MiniLM-L6-v2 model), each chunk is embedded into a 384-dimensional vector stored in ChromaDB, a persistent vector database. Next, you submit a query. The query is embedded using the same transformer model and returns a vector. Cosine similarity is used to find the top 5 most semantically relevant chunks. Then, it passes those chunks into an LLM (deepseek-v4-flash) as grounded context and asks it to respond to the query. The LLM's response is returned to the user. You may also reset the vector database.
