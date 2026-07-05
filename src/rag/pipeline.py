@@ -22,10 +22,16 @@ def ingest(path: str) -> None:
     add(chunks, embeddings, Path(path).stem)
 
 
-def query(query: str) -> str:
+def query(query: str, debug: bool = False) -> str:
 
     embedding = embed(query)
-    chunks = store.query(embedding=embedding, top_k=3)
+    chunks = store.query(embedding=embedding, top_k=5)
+
+    if debug:
+        for i, chunk in enumerate(chunks):
+            print(f"--- chunk {i + 1}")
+            print(chunk)
+            print()
 
     context = "\n\n".join(f"Chunk {i + 1}:\n{chunk}" for i, chunk in enumerate(chunks))
 
@@ -34,7 +40,7 @@ def query(query: str) -> str:
         messages=[
             {
                 "role": "system",
-                "content": "You are a research assistant. Answer the user's question using ONLY context provided below. If the answer is not in the context, say \"I don't have enough information to answer that.\"",
+                "content": "You are a research assistant. Answer the user's question using context provided below. Provide a complete and detailed answer. If the answer is not in the context, say \"I don't have enough information to answer that.\"",
             },
             {
                 "role": "user",

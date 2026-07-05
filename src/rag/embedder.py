@@ -1,4 +1,8 @@
 from sentence_transformers import SentenceTransformer
+import os
+
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 

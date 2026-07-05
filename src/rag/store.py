@@ -16,7 +16,7 @@ def add(chunks: list[str], embeddings: list[list[float]], doc_id: str) -> None:
     )
 
 
-def query(embedding: list[float], top_k: int = 3) -> list[str]:
+def query(embedding: list[float], top_k: int = 5) -> list[str]:
     return collection.query(query_embeddings=[embedding], n_results=top_k)["documents"][  # type: ignore
         0
     ]

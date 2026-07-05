@@ -11,8 +11,8 @@ def ingest(path: str):
 
 
 @app.command()
-def query(query: str):
-    print(pipeline.query(query))
+def query(query: str, debug: bool = False):
+    print(pipeline.query(query, debug=debug))
 
 
 @app.command()

@@ -1,4 +1,3 @@
-from os import name
 from pypdf import PdfReader
 
 
@@ -21,5 +20,7 @@ def load_pdf(path: str) -> str:
 
 
 if __name__ == "__main__":
-    text = load_pdf("/home/faris/Downloads/Active Engagement Reflection.pdf")
-    print(text[:500])
+    text = load_pdf(
+        "/home/faris/Projects/rag-cli/The Intersection of Visual Science and Art in Renaissance Italy.pdf"
+    )
+    print(text[:10000])
